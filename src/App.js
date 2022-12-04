@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Routes from "./router/Routes";
+import { Toaster } from 'react-hot-toast';
+import { useContext } from "react";
+import { UserContext } from "./context/AuthContextProvider/AuthContextProvider";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  const { loading } = useContext(UserContext);
+
+  if (loading) {
+    return <div className="grid min-h-screen place-content-center">
+      <div className="flex items-center gap-2 text-gray-500">
+        <span className="h-6 w-6 block rounded-full border-4 border-t-blue-300 animate-spin"></span>
+        loading...
+      </div>
+
     </div>
+
+  }
+
+  return (
+    <>
+      <Routes />
+      <Toaster />
+    </>
   );
 }
 
